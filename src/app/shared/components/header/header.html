@@ -1,0 +1,73 @@
+<header class="border-b border-gray-200 bg-white">
+    <nav class="mx-auto max-w-6xl px-4 py-4 sm:px-6">
+        <div class="flex items-center justify-between">
+            <a routerLink="/" class="text-xl font-bold text-blue-600 sm:text-2xl">
+                {{ appName() }}
+            </a>
+
+            <!-- Desktop navigation -->
+            <div class="hidden items-center gap-6 md:flex">
+                <a routerLink="/" routerLinkActive="!text-blue-600" [routerLinkActiveOptions]="{ exact: true }"
+                    class="flex items-center gap-2 font-medium text-gray-600 transition hover:text-blue-600">
+                    <svg lucideHouse class="h-5 w-5"></svg>
+                    Home
+                </a>
+
+                <a routerLink="/about" routerLinkActive="!text-blue-600"
+                    class="font-medium text-gray-600 transition hover:text-blue-600">
+                    About
+                </a>
+
+                <a routerLink="/login" routerLinkActive="!text-blue-600"
+                    class="font-medium text-gray-600 transition hover:text-blue-600">
+                    Login
+                </a>
+
+                <a routerLink="/register" routerLinkActive="!bg-blue-800"
+                    class="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700">
+                    Register
+                </a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button type="button" class="rounded-lg p-2 text-gray-700 hover:bg-gray-100 md:hidden"
+                aria-label="Toggle navigation menu" (click)="toggleMenu()">
+                @if (isMenuOpen()) {
+                <svg lucideX class="h-6 w-6"></svg>
+                } @else {
+                <svg lucideMenu class="h-6 w-6"></svg>
+                }
+            </button>
+        </div>
+
+        <!-- Mobile navigation -->
+        @if (isMenuOpen()) {
+        <div class="mt-4 flex flex-col gap-2 border-t border-gray-200 pt-4 md:hidden">
+            <a routerLink="/" routerLinkActive="!bg-blue-50 !text-blue-600" [routerLinkActiveOptions]="{ exact: true }"
+                class="flex items-center gap-2 rounded-lg px-4 py-3 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                (click)="closeMenu()">
+                <svg lucideHouse class="h-5 w-5"></svg>
+                Home
+            </a>
+
+            <a routerLink="/about" routerLinkActive="!bg-blue-50 !text-blue-600"
+                class="rounded-lg px-4 py-3 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                (click)="closeMenu()">
+                About
+            </a>
+
+            <a routerLink="/login" routerLinkActive="!bg-blue-50 !text-blue-600"
+                class="rounded-lg px-4 py-3 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                (click)="closeMenu()">
+                Login
+            </a>
+
+            <a routerLink="/register"
+                class="mt-2 rounded-lg bg-blue-600 px-4 py-3 text-center font-semibold text-white hover:bg-blue-700"
+                (click)="closeMenu()">
+                Register
+            </a>
+        </div>
+        }
+    </nav>
+</header>

@@ -1,0 +1,58 @@
+<section class="flex items-center bg-gray-50 px-6 py-16">
+    <div class="mx-auto w-full max-w-md rounded-2xl bg-white p-8 shadow-sm">
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-gray-900">Create account</h1>
+            <p class="mt-2 text-gray-600">Enter your information below</p>
+        </div>
+
+        <form [formRoot]="registerForm" class="mt-8 space-y-5">
+            <div>
+                <label for="name" class="mb-2 block text-sm font-medium text-gray-700">
+                    Full name
+                </label>
+
+                <input id="name" type="text" placeholder="Ahmed Ehab" [formField]="registerForm.fullName"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+
+                @if( registerForm.fullName().touched() && registerForm.fullName().invalid() ){
+                @for (error of registerForm.fullName().errors(); track error.kind){
+                <p class="mt-1 text-sm text-red-600">
+                    {{ error.message }}
+                </p>
+                }
+                }
+            </div>
+
+            <div>
+                <label for="email" class="mb-2 block text-sm font-medium text-gray-700">
+                    Email address
+                </label>
+
+                <input id="email" type="email" placeholder="example@email.com"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+            </div>
+
+            <div>
+                <label for="password" class="mb-2 block text-sm font-medium text-gray-700">
+                    Password
+                </label>
+
+                <input id="password" type="password" placeholder="Create a password"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+            </div>
+
+            <button type="submit"
+                class="w-full rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700">
+                Create Account
+            </button>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-gray-600">
+            Already have an account?
+
+            <a routerLink="/login" class="font-semibold text-blue-600 hover:underline">
+                Login
+            </a>
+        </p>
+    </div>
+</section>
