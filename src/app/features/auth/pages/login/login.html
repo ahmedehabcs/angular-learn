@@ -2,7 +2,16 @@
     <div class="mx-auto w-full max-w-md rounded-2xl bg-white p-8 shadow-sm">
         <div class="text-center">
             <h1 class="text-3xl font-bold text-gray-900">Welcome back</h1>
+            @if (loginForm().errors().length > 0) {
+            @for (error of loginForm().errors(); track $index) {
+            <p class="text-center text-sm text-red-600">
+                {{ error.message }}
+            </p>
+            }
+            } @else {
             <p class="mt-2 text-gray-600">Login to your account</p>
+
+            }
         </div>
 
         <form [formRoot]="loginForm" class="mt-8 space-y-5">
@@ -15,11 +24,11 @@
                     class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
 
                 @if (loginForm.email().touched() && loginForm.email().invalid()){
-                    @for( error of loginForm.email().errors(); track error.message){
-                        <p class="mt-1 text-sm text-red-600">
-                            {{ error.message }}
-                        </p>
-                    }
+                @for( error of loginForm.email().errors(); track error.message){
+                <p class="mt-1 text-sm text-red-600">
+                    {{ error.message }}
+                </p>
+                }
                 }
             </div>
 
@@ -31,21 +40,22 @@
                 <input id="password" type="password" placeholder="Enter your password" [formField]="loginForm.password"
                     class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
 
-                    @if(loginForm.password().touched() && loginForm.password().invalid()){
-                        @for(error of loginForm.password().errors(); track error.message){
-                            <p class="mt-1 text-sm text-red-600">
-                                {{ error.message }}
-                            </p>
-                        }
-                    }
+                @if(loginForm.password().touched() && loginForm.password().invalid()){
+                @for(error of loginForm.password().errors(); track error.message){
+                <p class="mt-1 text-sm text-red-600">
+                    {{ error.message }}
+                </p>
+                }
+                }
             </div>
+
 
             <button type="submit" [disabled]="loginForm().invalid() || loginForm().submitting()"
                 class="w-full rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700 flex justify-center items-center">
                 @if(loginForm().submitting()){
-                    <svg lucideLoaderCircle class="h-5 w-5 animate-spin"></svg>
+                <svg lucideLoaderCircle class="h-5 w-5 animate-spin"></svg>
                 }@else{
-                    Login
+                Login
                 }
             </button>
         </form>
