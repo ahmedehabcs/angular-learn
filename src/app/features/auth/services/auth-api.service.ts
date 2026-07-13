@@ -16,8 +16,7 @@ export class AuthApiService {
     return this.http.post<AuthResponse>(`${this.baseUrl}/login`, data);
   }
 
-  register(data: RegisterData): Observable<AuthResponse> {
+  register(data: RegisterData): Observable<AuthResponse> {    
     return this.http.post<AuthResponse>(`${this.baseUrl}/register`, data);
   }
-
 }

@@ -2,7 +2,13 @@
     <div class="mx-auto w-full max-w-md rounded-2xl bg-white p-8 shadow-sm">
         <div class="text-center">
             <h1 class="text-3xl font-bold text-gray-900">Create account</h1>
+            @if(registerForm().errors().length > 0){
+            @for(error of registerForm().errors(); track error.message){
+            <p class="mt-2 text-gray-600">{{ error.message }}</p>
+            }
+            } @else {
             <p class="mt-2 text-gray-600">Enter your information below</p>
+            }
         </div>
 
         <form [formRoot]="registerForm" class="mt-8 space-y-5">
@@ -28,8 +34,15 @@
                     Email address
                 </label>
 
-                <input id="email" type="email" placeholder="example@email.com"
+                <input id="email" type="email" placeholder="example@email.com" [formField]="registerForm.email"
                     class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+                @if (registerForm.email().touched() && registerForm.email().invalid()){
+                @for( error of registerForm.email().errors(); track error.message){
+                <p class="mt-1 text-sm text-red-600">
+                    {{ error.message }}
+                </p>
+                }
+                }
             </div>
 
             <div>
@@ -37,8 +50,15 @@
                     Password
                 </label>
 
-                <input id="password" type="password" placeholder="Create a password"
+                <input id="password" type="password" placeholder="Create a password" [formField]="registerForm.password"
                     class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+                @if (registerForm.password().touched() && registerForm.password().invalid()){
+                @for( error of registerForm.password().errors(); track error.message){
+                <p class="mt-1 text-sm text-red-600">
+                    {{ error.message }}
+                </p>
+                }
+                }
             </div>
 
             <button type="submit"
