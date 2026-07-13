@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { PublicLayout } from './layouts/public-layout/public-layout';
+import { AdminLayout } from './layouts/admin-layout/admin-layout';
+import { adminGuard, adminChildGuard } from './core/guards/admin-guard';
 
 export const routes: Routes = [
   {
@@ -28,4 +30,21 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'admin',
+    component: AdminLayout,
+    canActivate: [adminGuard],
+    canActivateChild: [adminChildGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        loadComponent: () => import("./features/admin/overview/pages/overview/overview").then((m) => m.Overview)
+      }
+    ]
+  }
 ];

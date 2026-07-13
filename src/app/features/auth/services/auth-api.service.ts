@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { LoginData, RegisterData, AuthResponse } from '../models/auth.model';
+import { LoginData, RegisterData, AuthResponse, CurrentUser } from '../models/auth.model';
 
 
 @Injectable({
@@ -18,5 +18,9 @@ export class AuthApiService {
 
   register(data: RegisterData): Observable<AuthResponse> {    
     return this.http.post<AuthResponse>(`${this.baseUrl}/register`, data);
+  }
+
+  me(): Observable<CurrentUser>{
+    return this.http.get<CurrentUser>(`${this.baseUrl}/me`);
   }
 }

@@ -1,0 +1,60 @@
+<header class="sticky top-0 z-30 border-b border-gray-200 bg-white/95 backdrop-blur">
+    <div class="flex h-16 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <div class="flex min-w-0 items-center gap-3">
+            <button type="button" aria-label="Open sidebar"
+                class="rounded-lg p-2 text-gray-600 hover:bg-gray-100 md:hidden" (click)="toggleSidebar.emit()">
+                <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+
+            <div class="min-w-0">
+                <h1 class="truncate text-lg font-semibold text-gray-900">
+                    Dashboard
+                </h1>
+
+                <p class="hidden text-sm text-gray-500 sm:block">
+                    Manage your store and monitor performance
+                </p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+            <!-- Search -->
+            <div class="relative hidden lg:block">
+                <svg class="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m20 20-3.5-3.5" />
+                </svg>
+
+                <input type="search" placeholder="Search..."
+                    class="w-64 rounded-lg border border-gray-300 bg-gray-50 py-2 pl-9 pr-3 text-sm outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100" />
+            </div>
+
+            <!-- Notifications -->
+            <button type="button" aria-label="Notifications"
+                class="relative rounded-lg p-2 text-gray-600 hover:bg-gray-100">
+                <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+                    <path d="M10 21h4" />
+                </svg>
+
+                <span class="absolute right-1.5 top-1.5 size-2 rounded-full bg-red-500"></span>
+            </button>
+
+            <!-- Profile -->
+            <button type="button" class="flex items-center gap-2 rounded-lg p-1.5 hover:bg-gray-100">
+                <div
+                    class="flex size-9 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
+                    AE
+                </div>
+
+                <div class="hidden text-left sm:block">
+                    <p class="text-sm font-semibold text-gray-900">Ahmed</p>
+                    <p class="text-xs text-gray-500">Admin</p>
+                </div>
+            </button>
+        </div>
+    </div>
+</header>

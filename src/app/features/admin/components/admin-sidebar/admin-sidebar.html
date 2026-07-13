@@ -1,0 +1,92 @@
+<!-- Mobile overlay -->
+@if (open()) {
+<button type="button" aria-label="Close sidebar" class="fixed inset-0 z-40 bg-gray-900/50 md:hidden"
+    (click)="closeSidebar.emit()"></button>
+}
+
+<aside
+    class="fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-gray-200 bg-white transition-transform duration-300 md:translate-x-0"
+    [class.translate-x-0]="open()" [class.-translate-x-full]="!open()">
+    <!-- Logo -->
+    <div class="flex h-16 items-center justify-between border-b border-gray-200 px-5">
+        <a routerLink="/admin/overview" class="text-xl font-bold text-gray-900" (click)="closeSidebar.emit()">
+            AdminPanel
+        </a>
+
+        <button type="button" aria-label="Close sidebar"
+            class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 md:hidden" (click)="closeSidebar.emit()">
+            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 space-y-1 overflow-y-auto p-4">
+        <a routerLink="/admin/overview" routerLinkActive="bg-blue-50 text-blue-700"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+            (click)="closeSidebar.emit()">
+            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" />
+                <rect x="3" y="14" width="7" height="7" rx="1" />
+                <rect x="14" y="14" width="7" height="7" rx="1" />
+            </svg>
+
+            Overview
+        </a>
+
+        <a routerLink="/admin/products" routerLinkActive="bg-blue-50 text-blue-700"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+            (click)="closeSidebar.emit()">
+            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 7h12l1 14H5L6 7Z" />
+                <path d="M9 7V5a3 3 0 0 1 6 0v2" />
+            </svg>
+
+            Products
+        </a>
+
+        <a routerLink="/admin/orders" routerLinkActive="bg-blue-50 text-blue-700"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+            (click)="closeSidebar.emit()">
+            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 3h12v18H6z" />
+                <path d="M9 8h6M9 12h6M9 16h4" />
+            </svg>
+
+            Orders
+        </a>
+
+        <a routerLink="/admin/settings" routerLinkActive="bg-blue-50 text-blue-700"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+            (click)="closeSidebar.emit()">
+            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <path
+                    d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H3v-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.6V3h4v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z" />
+            </svg>
+
+            Settings
+        </a>
+    </nav>
+
+    <!-- User -->
+    <div class="border-t border-gray-200 p-4">
+        <div class="flex items-center gap-3 rounded-lg bg-gray-50 p-3">
+            <div
+                class="flex size-10 shrink-0 items-center justify-center rounded-full bg-blue-600 font-semibold text-white">
+                AE
+            </div>
+
+            <div class="min-w-0 flex-1">
+                <p class="truncate text-sm font-semibold text-gray-900">
+                    Ahmed Ehab
+                </p>
+                <p class="truncate text-xs text-gray-500">
+                    Administrator
+                </p>
+            </div>
+        </div>
+    </div>
+</aside>
