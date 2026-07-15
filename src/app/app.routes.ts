@@ -33,8 +33,8 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayout,
-    canActivate: [adminGuard],
-    canActivateChild: [adminChildGuard],
+    // canActivate: [adminGuard],
+    // canActivateChild: [adminChildGuard],
     children: [
       {
         path: '',
@@ -44,6 +44,10 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () => import("./features/admin/overview/pages/overview/overview").then((m) => m.Overview)
+      },
+      {
+        path: 'products',
+        loadComponent: () => import("./features/admin/products/product-list/product-list").then((m) => m.ProductList)
       }
     ]
   }

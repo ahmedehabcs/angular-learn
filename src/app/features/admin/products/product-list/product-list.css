@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+table {
+  width: 100%;
+}
+
+.active-chip {
+  --mdc-chip-elevated-container-color: #f0fdf4;
+  --mdc-chip-label-text-color: #15803d;
+}
+
+.inactive-chip {
+  --mdc-chip-elevated-container-color: #f3f4f6;
+  --mdc-chip-label-text-color: #4b5563;
+}
