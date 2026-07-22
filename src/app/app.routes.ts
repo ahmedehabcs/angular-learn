@@ -47,7 +47,11 @@ export const routes: Routes = [
       },
       {
         path: 'products',
-        loadComponent: () => import("./features/admin/products/product-list/product-list").then((m) => m.ProductList)
+        children: [
+          { path: '', loadComponent: () => import("./features/admin/products/pages/product-list/product-list").then((m) => m.ProductList) },
+          { path: 'new', loadComponent: () => import('./features/admin/products/pages/product-form/product-form').then((m) => m.ProductForm)},
+          { path: ':id/edit', loadComponent: () => import('./features/admin/products/pages/product-form/product-form').then((m) => m.ProductForm)},
+        ]
       }
     ]
   }

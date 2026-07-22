@@ -9,8 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ProductService } from '../../services/product-service';
-import { Product } from '../models/product.model';
+import { ProductService } from '../../../services/product-service';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-product-list',

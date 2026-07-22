@@ -9,7 +9,7 @@ export interface Product {
     stock: number;
     brand: string;
     sku: string;
-    availabilityStatus: string;
+    availabilityStatus: 'In Stock' | 'Low Stock' | 'Out of Stock';
     thumbnail: string;
     images: string[];
     status: 'Active' | 'Inactive';
@@ -20,4 +20,10 @@ export interface ProductResponse {
     total: number;
     skip: number;
     limit: number;
+}
+
+export interface Category {
+    name: string;
+    slug: string;
+    url: string;
 }
