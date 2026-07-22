@@ -12,7 +12,9 @@ export class ProductService {
   private readonly baseUrl = `${environment.apiUrl}/products`;
 
   getAllProducts(): Observable<ProductResponse> {
-    return this.http.get<ProductResponse>(this.baseUrl);
+    return this.http.get<ProductResponse>(this.baseUrl).pipe(
+      tap((r) => console.log(r))
+    )
   }
 
   delete(id: number): Observable<void> {
