@@ -1,250 +1,155 @@
 <section class="space-y-6">
+  <!-- Page Heading -->
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-900 sm:text-3xl">Add Product</h2>
 
-    <!-- Page Heading -->
-    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-
-        <div>
-            <h2 class="text-2xl font-bold text-gray-900 sm:text-3xl">
-                Add Product
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-500 sm:text-base">
-                Create a new product for your store.
-            </p>
-        </div>
-
-        <div class="flex gap-3">
-            <button routerLink="/admin/products" mat-stroked-button type="button">
-                Cancel
-            </button>
-
-            <button mat-flat-button type="submit" form="product-form">
-                Save Product
-            </button>
-        </div>
-
+      <p class="mt-1 text-sm text-gray-500 sm:text-base">Create a new product for your store.</p>
     </div>
 
-    <!-- Form -->
-    <div class="mx-auto lg:max-w-7xl">
+    <div class="flex gap-3">
+      <button routerLink="/admin/products" mat-stroked-button type="button">Cancel</button>
 
-        <mat-card appearance="outlined" class="rounded-xl! border-gray-200! bg-white! shadow-sm!">
-
-            <mat-card-content class="p-5!">
-
-                <form id="product-form" [formRoot]="productForm" (submit)="submitProductForm($event)" class="space-y-6">
-
-
-                    <!-- Basic Information -->
-                    <div>
-
-                        <h3 class="mb-4 text-base font-semibold text-gray-900">
-                            Basic Information
-                        </h3>
-
-                        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-
-
-                            <mat-form-field appearance="outline" class="w-full">
-                                <mat-label>Title</mat-label>
-
-                                <input matInput [formField]="productForm.title">
-
-                            </mat-form-field>
-
-
-                            <mat-form-field appearance="outline" class="w-full">
-                                <mat-label>Brand</mat-label>
-
-                                <input matInput [formField]="productForm.brand">
-
-                            </mat-form-field>
-
-
-                            <mat-form-field appearance="outline" class="w-full lg:col-span-2">
-                                <mat-label>Description</mat-label>
-
-                                <textarea matInput rows="4" [formField]="productForm.description">
-                                </textarea>
-
-                            </mat-form-field>
-
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- Pricing -->
-                    <div>
-
-                        <h3 class="mb-4 text-base font-semibold text-gray-900">
-                            Pricing
-                        </h3>
-
-
-                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-
-
-                            <mat-form-field appearance="outline" class="w-full">
-                                <mat-label>Price</mat-label>
-
-                                <input matInput type="number" [formField]="productForm.price">
-
-                            </mat-form-field>
-
-
-
-                            <mat-form-field appearance="outline" class="w-full">
-                                <mat-label>Discount %</mat-label>
-
-                                <input matInput type="number" [formField]="productForm.discountPercentage">
-
-                            </mat-form-field>
-
-
-
-                            <mat-form-field appearance="outline" class="w-full">
-                                <mat-label>Stock</mat-label>
-
-                                <input matInput type="number" [formField]="productForm.stock">
-
-                            </mat-form-field>
-
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- Product Details -->
-                    <div>
-
-                        <h3 class="mb-4 text-base font-semibold text-gray-900">
-                            Product Details
-                        </h3>
-
-
-                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-
-
-                            <mat-form-field appearance="outline" class="w-full">
-
-                                <mat-label>Category</mat-label>
-
-                                <mat-select [formField]="productForm.category">
-
-                                    @for(cat of categories(); track cat.slug){
-
-                                    <mat-option [value]="cat.slug">
-                                        {{ cat.name }}
-                                    </mat-option>
-
-                                    }
-
-                                </mat-select>
-
-                            </mat-form-field>
-
-
-
-                            <mat-form-field appearance="outline" class="w-full">
-
-                                <mat-label>Status</mat-label>
-
-                                <mat-select [formField]="productForm.status">
-
-                                    @for(status of statuses; track status){
-
-                                    <mat-option [value]="status">
-                                        {{ status }}
-                                    </mat-option>
-
-                                    }
-
-                                </mat-select>
-
-                            </mat-form-field>
-
-
-
-                            <mat-form-field appearance="outline" class="w-full">
-
-                                <mat-label>Availability Status</mat-label>
-
-                                <mat-select [formField]="productForm.availabilityStatus">
-
-                                    @for(status of availabilityStatuses; track status){
-
-                                    <mat-option [value]="status">
-                                        {{ status }}
-                                    </mat-option>
-
-                                    }
-
-                                </mat-select>
-
-                            </mat-form-field>
-
-
-
-                            <mat-form-field appearance="outline" class="w-full">
-
-                                <mat-label>SKU</mat-label>
-
-                                <input matInput [formField]="productForm.sku">
-
-                            </mat-form-field>
-
-
-
-                            <mat-form-field appearance="outline" class="w-full">
-
-                                <mat-label>Rating</mat-label>
-
-                                <input matInput type="number" [formField]="productForm.rating">
-
-                            </mat-form-field>
-
-
-                        </div>
-
-                    </div>
-
-
-
-
-                    <!-- Images -->
-                    <div>
-
-                        <h3 class="mb-4 text-base font-semibold text-gray-900">
-                            Images
-                        </h3>
-
-
-                        <div class="grid grid-cols-1 gap-4">
-
-
-                            <mat-form-field appearance="outline" class="w-full">
-
-                                <mat-label>Thumbnail URL</mat-label>
-
-                                <input matInput [formField]="productForm.thumbnail">
-
-                            </mat-form-field>
-
-                            <mat-form-field appearance="outline" class="w-full">
-                                <mat-label>Image URLs</mat-label>
-
-                                <textarea matInput rows="3" [value]="imagesText()" (input)="updateImages($event)">
-                                </textarea>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </form>
-            </mat-card-content>
-        </mat-card>
+      <button mat-flat-button type="submit" form="product-form">Save Product</button>
     </div>
+  </div>
+
+  <!-- Form -->
+  <div class="mx-auto lg:max-w-7xl">
+    <mat-card appearance="outlined" class="rounded-xl! border-gray-200! bg-white! shadow-sm!">
+      <mat-card-content class="p-5!">
+        <form
+          id="product-form"
+          [formRoot]="productForm"
+          (submit)="submitProductForm($event)"
+          class="space-y-6"
+        >
+          <!-- Basic Information -->
+          <div>
+            <h3 class="mb-4 text-base font-semibold text-gray-900">Basic Information</h3>
+
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Title</mat-label>
+
+                <input matInput [formField]="productForm.title" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Brand</mat-label>
+
+                <input matInput [formField]="productForm.brand" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full lg:col-span-2">
+                <mat-label>Description</mat-label>
+
+                <textarea matInput rows="4" [formField]="productForm.description"> </textarea>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Pricing -->
+          <div>
+            <h3 class="mb-4 text-base font-semibold text-gray-900">Pricing</h3>
+
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Price</mat-label>
+
+                <input matInput type="number" [formField]="productForm.price" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Discount %</mat-label>
+
+                <input matInput type="number" [formField]="productForm.discountPercentage" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Stock</mat-label>
+
+                <input matInput type="number" [formField]="productForm.stock" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Product Details -->
+          <div>
+            <h3 class="mb-4 text-base font-semibold text-gray-900">Product Details</h3>
+
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Category</mat-label>
+
+                <mat-select [formField]="productForm.category">
+                  @for (cat of categories(); track cat.slug) {
+                    <mat-option [value]="cat.slug">
+                      {{ cat.name }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Status</mat-label>
+
+                <mat-select [formField]="productForm.status">
+                  @for (status of statuses; track status) {
+                    <mat-option [value]="status">
+                      {{ status }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Availability Status</mat-label>
+
+                <mat-select [formField]="productForm.availabilityStatus">
+                  @for (status of availabilityStatuses; track status) {
+                    <mat-option [value]="status">
+                      {{ status }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>SKU</mat-label>
+
+                <input matInput [formField]="productForm.sku" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Rating</mat-label>
+
+                <input matInput type="number" [formField]="productForm.rating" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Images -->
+          <div>
+            <h3 class="mb-4 text-base font-semibold text-gray-900">Images</h3>
+
+            <div class="grid grid-cols-1 gap-4">
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Thumbnail URL</mat-label>
+
+                <input matInput [formField]="productForm.thumbnail" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Image URLs</mat-label>
+
+                <textarea matInput rows="3" [value]="imagesText()" (input)="updateImages($event)">
+                </textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </section>

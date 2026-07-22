@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AdminTheme } from './admin-theme';
+import { AdminTheme } from './admin-theme.service';
 
 describe('AdminTheme', () => {
   let service: AdminTheme;
