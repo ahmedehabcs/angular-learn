@@ -52,6 +52,13 @@ export const routes: Routes = [
           { path: 'new', loadComponent: () => import('./features/admin/products/pages/product-form/product-form').then((m) => m.ProductForm)},
           { path: ':id/edit', loadComponent: () => import('./features/admin/products/pages/product-form/product-form').then((m) => m.ProductForm)},
         ]
+      },
+      {
+        path: 'orders',
+        children: [
+          { path: '', loadComponent: () => import('./features/admin/orders/pages/order-list/order-list').then((m) => m.OrderList)},
+          
+        ]
       }
     ]
   }
