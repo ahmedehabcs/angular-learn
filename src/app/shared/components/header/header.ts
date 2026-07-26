@@ -1,15 +1,19 @@
-import { Component, signal, input } from '@angular/core';
+import { Component, inject, signal, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { LucideHouse, LucideMenu, LucideX } from "@lucide/angular";
+import { LucideHouse, LucideMenu, LucideShoppingCart, LucideX } from "@lucide/angular";
+import { AuthApiService } from '../../../features/auth/services/auth-api.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, LucideHouse, LucideMenu, LucideX],
+  imports: [RouterLink, RouterLinkActive, LucideHouse, LucideMenu, LucideShoppingCart, LucideX],
   templateUrl: './header.html',
 })
 export class Header {
+  private readonly authService = inject(AuthApiService);
+
   readonly appName = input<string>('AngularApp');
   protected readonly isMenuOpen = signal(false);
+  protected readonly isLoggedIn = this.authService.isLoggedIn;
 
   protected toggleMenu(): void {
     this.isMenuOpen.update((value) => !value);

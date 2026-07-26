@@ -38,7 +38,6 @@ export class Login {
         action: async (field) => {
           try {
             const res = await firstValueFrom(this.authService.login(field().value()));
-            localStorage.setItem('token', res.accessToken);
             await this.router.navigate(['/profile']);
             return;
 

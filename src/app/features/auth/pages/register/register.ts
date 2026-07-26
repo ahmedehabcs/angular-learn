@@ -38,7 +38,6 @@ export class Register {
         action: async (field) => {
           try {
             const response = await firstValueFrom(this.authApi.register(field().value()));
-            localStorage.setItem('token', response.accessToken);
             await this.router.navigate(['/profile']);
             return;
           } catch (error) {

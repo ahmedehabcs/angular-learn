@@ -18,20 +18,27 @@
                     About
                 </a>
 
-                <a routerLink="/profile" routerLinkActive="!text-blue-600"
-                    class="font-medium text-gray-600 transition hover:text-blue-600">
-                    Profile
-                </a>
+                @if (isLoggedIn()) {
+                    <a routerLink="/profile" routerLinkActive="!text-blue-600"
+                        class="font-medium text-gray-600 transition hover:text-blue-600">
+                        Profile
+                    </a>
 
-                <a routerLink="/login" routerLinkActive="!text-blue-600"
-                    class="font-medium text-gray-600 transition hover:text-blue-600">
-                    Login
-                </a>
+                    <button type="button" aria-label="Shopping cart"
+                        class="rounded-lg p-2 text-gray-600 transition hover:bg-blue-50 hover:text-blue-600">
+                        <svg lucideShoppingCart class="h-6 w-6"></svg>
+                    </button>
+                } @else {
+                    <a routerLink="/login" routerLinkActive="!text-blue-600"
+                        class="font-medium text-gray-600 transition hover:text-blue-600">
+                        Login
+                    </a>
 
-                <a routerLink="/register" routerLinkActive="!bg-blue-800"
-                    class="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700">
-                    Register
-                </a>
+                    <a routerLink="/register" routerLinkActive="!bg-blue-800"
+                        class="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700">
+                        Register
+                    </a>
+                }
             </div>
 
             <!-- Mobile menu button -->
@@ -61,23 +68,32 @@
                 About
             </a>
 
-            <a routerLink="/profile" routerLinkActive="!bg-blue-50 !text-blue-600"
-                class="rounded-lg px-4 py-3 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
-                (click)="closeMenu()">
-                Profile
-            </a>
+            @if (isLoggedIn()) {
+                <a routerLink="/profile" routerLinkActive="!bg-blue-50 !text-blue-600"
+                    class="rounded-lg px-4 py-3 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                    (click)="closeMenu()">
+                    Profile
+                </a>
 
-            <a routerLink="/login" routerLinkActive="!bg-blue-50 !text-blue-600"
-                class="rounded-lg px-4 py-3 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
-                (click)="closeMenu()">
-                Login
-            </a>
+                <button type="button"
+                    class="flex items-center gap-2 rounded-lg px-4 py-3 text-left font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                    (click)="closeMenu()">
+                    <svg lucideShoppingCart class="h-5 w-5"></svg>
+                    Cart
+                </button>
+            } @else {
+                <a routerLink="/login" routerLinkActive="!bg-blue-50 !text-blue-600"
+                    class="rounded-lg px-4 py-3 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                    (click)="closeMenu()">
+                    Login
+                </a>
 
-            <a routerLink="/register"
-                class="mt-2 rounded-lg bg-blue-600 px-4 py-3 text-center font-semibold text-white hover:bg-blue-700"
-                (click)="closeMenu()">
-                Register
-            </a>
+                <a routerLink="/register"
+                    class="mt-2 rounded-lg bg-blue-600 px-4 py-3 text-center font-semibold text-white hover:bg-blue-700"
+                    (click)="closeMenu()">
+                    Register
+                </a>
+            }
         </div>
         }
     </nav>

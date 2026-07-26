@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Category, Product, ProductResponse } from '../products/models/product.model';
@@ -11,8 +11,18 @@ export class ProductService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = `${environment.apiUrl}/products`;
 
-  getAllProducts(): Observable<ProductResponse> {
-    return this.http.get<ProductResponse>(this.baseUrl);
+  getAllProducts(limit?: number, skip?: number): Observable<ProductResponse> {
+    let params = new HttpParams();
+
+    if (limit !== undefined) {
+      params = params.set('limit', limit);
+    }
+
+    if (skip !== undefined) {
+      params = params.set('skip', skip);
+    }
+
+    return this.http.get<ProductResponse>(this.baseUrl, { params });
   }
 
   getProductById(id: number): Observable<Product> {

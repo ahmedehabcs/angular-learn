@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
@@ -29,6 +29,7 @@ export class AuthApiService {
   private readonly http = inject(HttpClient);
   private readonly accountsKey = 'localAccounts';
   private readonly currentUserKey = 'currentUser';
+  readonly isLoggedIn = signal(Boolean(localStorage.getItem('token')));
 
   login(data: LoginData): Observable<AuthResponse> {
     const localAccount = this.getAccounts().find(
@@ -47,6 +48,7 @@ export class AuthApiService {
       };
 
       this.saveCurrentUser(localAccount);
+      this.startSession(response.accessToken);
       return of(response);
     }
 
@@ -85,6 +87,8 @@ export class AuthApiService {
         };
       }),
       tap((response) => {
+        this.startSession(response.accessToken);
+
         if (response.user) {
           this.saveCurrentUser({
             ...response.user,
@@ -116,11 +120,14 @@ export class AuthApiService {
     localStorage.setItem(this.accountsKey, JSON.stringify([...accounts, account]));
     this.saveCurrentUser(account);
 
-    return of({
+    const response: AuthResponse = {
       message: 'Account created successfully',
       accessToken: `local-token-${account.id}`,
       user: account,
-    });
+    };
+
+    this.startSession(response.accessToken);
+    return of(response);
   }
 
   me(): Observable<CurrentUser> {
@@ -179,6 +186,12 @@ export class AuthApiService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem(this.currentUserKey);
+    this.isLoggedIn.set(false);
+  }
+
+  private startSession(token: string): void {
+    localStorage.setItem('token', token);
+    this.isLoggedIn.set(true);
   }
 
   private getAccounts(): LocalAccount[] {
