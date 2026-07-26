@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { form, FormRoot, FormField, minLength, required, email } from '@angular/forms/signals';
 import { LucideLoaderCircle } from '@lucide/angular';
 import { LoginData } from '../../models/auth.model';
@@ -16,6 +16,7 @@ import { AuthApiService } from '../../services/auth-api.service';
 })
 export class Login {
   private readonly authService = inject(AuthApiService);
+  private readonly router = inject(Router);
   protected readonly loginModel = signal<LoginData>({
     email: '',
     password: '',
@@ -37,7 +38,8 @@ export class Login {
         action: async (field) => {
           try {
             const res = await firstValueFrom(this.authService.login(field().value()));
-            console.log("Login Successfull", res);
+            localStorage.setItem('token', res.accessToken);
+            await this.router.navigate(['/profile']);
             return;
 
           } catch (error) {

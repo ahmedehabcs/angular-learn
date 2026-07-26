@@ -1,0 +1,80 @@
+<section class="bg-gray-50 px-4 py-12 sm:px-6">
+    <div class="mx-auto max-w-3xl">
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold text-gray-900">My profile</h1>
+            <p class="mt-2 text-gray-600">Update your personal information and profile image.</p>
+        </div>
+
+        @if (loading()) {
+            <div class="rounded-2xl bg-white p-10 text-center text-gray-500 shadow-sm">
+                Loading profile...
+            </div>
+        } @else {
+            <form #profileForm="ngForm" (ngSubmit)="saveProfile()"
+                class="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
+
+                <!-- Profile image -->
+                <div class="flex flex-col items-center gap-4 border-b border-gray-200 pb-8 sm:flex-row">
+                    @if (profile().image) {
+                        <img [src]="profile().image" alt="Profile image"
+                            class="size-28 rounded-full border-4 border-blue-50 object-cover" />
+                    } @else {
+                        <div class="flex size-28 items-center justify-center rounded-full bg-blue-50 text-4xl font-bold text-blue-600">
+                            {{ profile().fullName.charAt(0).toUpperCase() || 'U' }}
+                        </div>
+                    }
+
+                    <div class="text-center sm:text-left">
+                        <label for="profile-image"
+                            class="inline-block cursor-pointer rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700">
+                            Choose image
+                        </label>
+                        <input id="profile-image" type="file" accept="image/*" class="hidden"
+                            (change)="selectImage($event)" />
+                        <p class="mt-2 text-sm text-gray-500">Choose a JPG, PNG, or WebP image.</p>
+                    </div>
+                </div>
+
+                <!-- Profile fields -->
+                <div class="mt-8 space-y-5">
+                    <div>
+                        <label for="fullName" class="mb-2 block text-sm font-medium text-gray-700">
+                            Full name
+                        </label>
+                        <input id="fullName" name="fullName" type="text" required
+                            [ngModel]="profile().fullName"
+                            (ngModelChange)="updateFullName($event)"
+                            class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+                    </div>
+
+                    <div>
+                        <label for="email" class="mb-2 block text-sm font-medium text-gray-700">
+                            Email address
+                        </label>
+                        <input id="email" name="email" type="email" required email
+                            [ngModel]="profile().email"
+                            (ngModelChange)="updateEmail($event)"
+                            class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+                    </div>
+                </div>
+
+                @if (errorMessage()) {
+                    <p class="mt-5 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
+                        {{ errorMessage() }}
+                    </p>
+                }
+
+                @if (successMessage()) {
+                    <p class="mt-5 rounded-lg bg-green-50 px-4 py-3 text-sm text-green-700">
+                        {{ successMessage() }}
+                    </p>
+                }
+
+                <button type="submit" [disabled]="profileForm.invalid || saving()"
+                    class="mt-6 w-full rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400 sm:w-auto">
+                    {{ saving() ? 'Saving...' : 'Save changes' }}
+                </button>
+            </form>
+        }
+    </div>
+</section>

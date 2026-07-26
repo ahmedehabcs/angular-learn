@@ -18,6 +18,11 @@
                     About
                 </a>
 
+                <a routerLink="/profile" routerLinkActive="!text-blue-600"
+                    class="font-medium text-gray-600 transition hover:text-blue-600">
+                    Profile
+                </a>
+
                 <a routerLink="/login" routerLinkActive="!text-blue-600"
                     class="font-medium text-gray-600 transition hover:text-blue-600">
                     Login
@@ -54,6 +59,12 @@
                 class="rounded-lg px-4 py-3 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
                 (click)="closeMenu()">
                 About
+            </a>
+
+            <a routerLink="/profile" routerLinkActive="!bg-blue-50 !text-blue-600"
+                class="rounded-lg px-4 py-3 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                (click)="closeMenu()">
+                Profile
             </a>
 
             <a routerLink="/login" routerLinkActive="!bg-blue-50 !text-blue-600"

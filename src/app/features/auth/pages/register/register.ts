@@ -1,7 +1,7 @@
 import { Component, signal, inject } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { form, FormRoot, FormField, minLength, required, email } from '@angular/forms/signals';
 import { RegisterData } from '../../models/auth.model';
 import { AuthApiService } from '../../services/auth-api.service';
@@ -13,6 +13,7 @@ import { AuthApiService } from '../../services/auth-api.service';
 })
 export class Register {
   private readonly authApi = inject(AuthApiService);
+  private readonly router = inject(Router);
   protected readonly registerModel = signal<RegisterData>({
     fullName: '',
     email: '',
@@ -36,18 +37,27 @@ export class Register {
       submission: {
         action: async (field) => {
           try {
-            const data = await firstValueFrom(this.authApi.register(field().value()));
-            console.log(data);
+            const response = await firstValueFrom(this.authApi.register(field().value()));
+            localStorage.setItem('token', response.accessToken);
+            await this.router.navigate(['/profile']);
             return;
           } catch (error) {
-            console.log(error);
             return {
-              kind: "serverError",
-              message: "registeration faild"
+              kind: "server",
+              message: this.getErrorMessage(error)
             }
           }
         }
       }
     }
   )
+
+  private getErrorMessage(error: unknown): string {
+    if (error instanceof Error && 'error' in error) {
+      const httpError = error as { error?: { message?: string } };
+      return httpError.error?.message ?? 'Registration failed';
+    }
+
+    return 'Registration failed';
+  }
 }

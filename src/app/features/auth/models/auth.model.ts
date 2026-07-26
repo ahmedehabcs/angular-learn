@@ -8,17 +8,19 @@ export interface RegisterData {
   password: string;
 }
 export interface CurrentUser {
-  id: string,
-  fullName: String,
-  email: string,
-  role: 'admin' | 'staff' | 'customer'
+  id: string;
+  fullName: string;
+  email: string;
+  role: 'admin' | 'staff' | 'customer';
+  image?: string;
 }
 export interface AuthResponse {
   message: string;
   accessToken: string;
-  user: {
+  user?: {
     id: string;
     email: string;
     fullName: string;
+    image?: string;
   }
 }

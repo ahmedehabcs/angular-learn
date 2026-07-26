@@ -28,6 +28,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/auth/pages/register/register').then((m) => m.Register),
       },
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./features/auth/pages/profile/profile').then((m) => m.Profile),
+      },
     ],
   },
   {
