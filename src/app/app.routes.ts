@@ -57,7 +57,7 @@ export const routes: Routes = [
         path: 'orders',
         children: [
           { path: '', loadComponent: () => import('./features/admin/orders/pages/order-list/order-list').then((m) => m.OrderList)},
-          
+          { path: ':id', loadComponent: () => import('./features/admin/orders/pages/order-details/order-details').then((m) => m.OrderDetails)},
         ]
       }
     ]

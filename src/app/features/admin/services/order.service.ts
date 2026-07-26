@@ -15,4 +15,7 @@ export class OrderService {
     return this.http.get<OrderResponse>(`${this.baseUrl}/`);
   }
 
+  getOrderById(id: number): Observable<Order> {
+    return this.http.get<Order>(`${this.baseUrl}/${id}`);
+  }
 }

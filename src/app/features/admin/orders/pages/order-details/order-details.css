@@ -1,0 +1,28 @@
+:host {
+    display: block;
+}
+
+.pending-chip {
+    --mdc-chip-elevated-container-color: #fff7ed;
+    --mdc-chip-label-text-color: #ea580c;
+}
+
+.processing-chip {
+    --mdc-chip-elevated-container-color: #eff6ff;
+    --mdc-chip-label-text-color: #2563eb;
+}
+
+.shipped-chip {
+    --mdc-chip-elevated-container-color: #faf5ff;
+    --mdc-chip-label-text-color: #9333ea;
+}
+
+.delivered-chip {
+    --mdc-chip-elevated-container-color: #f0fdf4;
+    --mdc-chip-label-text-color: #16a34a;
+}
+
+.cancelled-chip {
+    --mdc-chip-elevated-container-color: #fef2f2;
+    --mdc-chip-label-text-color: #dc2626;
+}

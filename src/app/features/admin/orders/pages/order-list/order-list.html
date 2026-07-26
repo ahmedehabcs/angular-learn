@@ -288,7 +288,12 @@
 
                         <td mat-cell *matCellDef="let order" class="px-5!">
                             <div class="flex items-center gap-1">
-                                <button mat-icon-button type="button" matTooltip="View order">
+                                <button
+                                    [routerLink]="['/admin/orders', order.id]"
+                                    mat-icon-button
+                                    type="button"
+                                    matTooltip="View order"
+                                    [attr.aria-label]="'View order ' + order.id">
                                     <mat-icon>visibility</mat-icon>
                                 </button>
                                 <button (click)="deleteOrder(order.id)" mat-icon-button type="button"

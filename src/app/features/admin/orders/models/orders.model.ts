@@ -33,3 +33,23 @@ export interface OrderProduct {
 export type OrderStatus = | 'Pending' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
 
 export type PaymentStatus = | 'Paid' | 'Pending' | 'Refunded';
+
+// DummyJSON does not return order or payment statuses.
+// These small helpers give each order a stable mock status for the UI.
+export function getOrderStatus(id: number): OrderStatus {
+    const statuses: OrderStatus[] = [
+        'Pending',
+        'Processing',
+        'Shipped',
+        'Delivered',
+        'Cancelled',
+    ];
+
+    return statuses[(id - 1) % statuses.length];
+}
+
+export function getPaymentStatus(id: number): PaymentStatus {
+    const statuses: PaymentStatus[] = ['Paid', 'Pending', 'Refunded'];
+
+    return statuses[(id - 1) % statuses.length];
+}

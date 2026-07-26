@@ -9,12 +9,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Order, OrderResponse, OrderStatus, PaymentStatus } from '../../models/orders.model';
+import {
+  getOrderStatus,
+  getPaymentStatus,
+  Order,
+  OrderResponse,
+  OrderStatus,
+  PaymentStatus,
+} from '../../models/orders.model';
 import { OrderService } from '../../../services/order.service';
 
 @Component({
   selector: 'app-order-list',
-  imports: [ MatButtonModule, MatCardModule, MatTableModule, MatChipsModule, MatTooltipModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatIconModule],
+  imports: [RouterLink, MatButtonModule, MatCardModule, MatTableModule, MatChipsModule, MatTooltipModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatIconModule],
   templateUrl: './order-list.html',
   styleUrl: './order-list.css',
 })
@@ -69,8 +76,8 @@ export class OrderList implements OnInit {
       next: (response: OrderResponse) => {
         const orders = response.carts.map<Order>((order) => ({
           ...order,
-          status: this.randomStatus(),
-          paymentStatus: this.randomPayment(),
+          status: getOrderStatus(order.id),
+          paymentStatus: getPaymentStatus(order.id),
         }));
 
         this.orders.set(orders);
@@ -160,28 +167,6 @@ export class OrderList implements OnInit {
     this.orders.update((orders) =>
       orders.filter((order) => order.id !== id)
     );
-  }
-
-  private randomStatus(): OrderStatus {
-    const statuses: OrderStatus[] = [
-      'Pending',
-      'Processing',
-      'Shipped',
-      'Delivered',
-      'Cancelled',
-    ];
-
-    return statuses[Math.floor(Math.random() * statuses.length)];
-  }
-
-  private randomPayment(): PaymentStatus {
-    const payments: PaymentStatus[] = [
-      'Paid',
-      'Pending',
-      'Refunded',
-    ];
-
-    return payments[Math.floor(Math.random() * payments.length)];
   }
 
   protected refreshOrders(): void {
