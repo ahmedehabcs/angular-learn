@@ -29,6 +29,7 @@ export class AuthApiService {
   private readonly http = inject(HttpClient);
   private readonly accountsKey = 'localAccounts';
   private readonly currentUserKey = 'currentUser';
+  readonly currentUser = signal<CurrentUser | null>(this.getCurrentUser());
   readonly isLoggedIn = signal(Boolean(localStorage.getItem('token')));
 
   login(data: LoginData): Observable<AuthResponse> {
@@ -186,6 +187,7 @@ export class AuthApiService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem(this.currentUserKey);
+    this.currentUser.set(null);
     this.isLoggedIn.set(false);
   }
 
@@ -210,6 +212,7 @@ export class AuthApiService {
       this.currentUserKey,
       JSON.stringify({ id, fullName, email, role, image })
     );
+    this.currentUser.set({ id, fullName, email, role, image });
   }
 
   private updateLocalAccount(user: CurrentUser): void {

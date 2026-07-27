@@ -38,7 +38,8 @@ export class Login {
         action: async (field) => {
           try {
             const res = await firstValueFrom(this.authService.login(field().value()));
-            await this.router.navigate(['/profile']);
+            const redirectUrl = res.user?.role === 'admin' ? '/admin/dashboard' : '/profile';
+            await this.router.navigate([redirectUrl]);
             return;
 
           } catch (error) {

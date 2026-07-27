@@ -38,8 +38,8 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayout,
-    // canActivate: [adminGuard],
-    // canActivateChild: [adminChildGuard],
+    canActivate: [adminGuard],
+    canActivateChild: [adminChildGuard],
     children: [
       {
         path: '',

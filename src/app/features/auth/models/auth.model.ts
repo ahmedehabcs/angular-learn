@@ -17,10 +17,5 @@ export interface CurrentUser {
 export interface AuthResponse {
   message: string;
   accessToken: string;
-  user?: {
-    id: string;
-    email: string;
-    fullName: string;
-    image?: string;
-  }
+  user?: CurrentUser;
 }

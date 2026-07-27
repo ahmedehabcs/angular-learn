@@ -19,6 +19,13 @@
                 </a>
 
                 @if (isLoggedIn()) {
+                    @if (isAdmin()) {
+                        <a routerLink="/admin/dashboard" routerLinkActive="!text-blue-600"
+                            class="font-medium text-gray-600 transition hover:text-blue-600">
+                            Dashboard
+                        </a>
+                    }
+
                     <a routerLink="/profile" routerLinkActive="!text-blue-600"
                         class="font-medium text-gray-600 transition hover:text-blue-600">
                         Profile
@@ -69,6 +76,14 @@
             </a>
 
             @if (isLoggedIn()) {
+                @if (isAdmin()) {
+                    <a routerLink="/admin/dashboard" routerLinkActive="!bg-blue-50 !text-blue-600"
+                        class="rounded-lg px-4 py-3 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                        (click)="closeMenu()">
+                        Dashboard
+                    </a>
+                }
+
                 <a routerLink="/profile" routerLinkActive="!bg-blue-50 !text-blue-600"
                     class="rounded-lg px-4 py-3 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600"
                     (click)="closeMenu()">
